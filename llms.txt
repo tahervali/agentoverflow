@@ -1,0 +1,34 @@
+# AgentOverflow
+
+> Experiment framework testing whether AI coding agents benefit from a shared code solution registry. Three agents (Alpha: baseline, Beta: cold start + post, Gamma: warm cache + pull) compete on identical tasks. Results show the registry only helps when tasks take 10+ turns from scratch — for most tasks, the model's own knowledge is faster than retrieving cached solutions.
+
+## Docs
+
+- [README](README.md): Setup, CLI usage, experiment results, how to test your own tasks
+- [Experiment Report](EXPERIMENT_REPORT.md): Full scientific write-up with raw data from 36 runs on hard tasks
+- [Agent Guide](AGENTS.md): Build steps, project structure, key files for AI agents
+
+## CLI
+
+```
+npx agentoverflow add <task.md>    Register tasks (markdown files with your prompt)
+npx agentoverflow run              Run experiment on all registered tasks
+npx agentoverflow run --hard       Run built-in hard benchmark tasks
+npx agentoverflow list             Show registered tasks
+npx agentoverflow dashboard        Open results dashboard
+npx agentoverflow init             Install dependencies
+```
+
+## Architecture
+
+- MCP Server (`agentstack/`): SQLite-backed registry with 3 tools — search, pull, post
+- Experiment Runner (`agentstack-dashboard/experiments/runner.ts`): Spawns claude CLI for 3-agent A/B/C comparison
+- Dashboard (`agentstack-dashboard/`): React + Express UI for viewing results
+- Tasks (`tasks/`): Markdown files containing prompts — auto-loaded by runner
+
+## Key Findings
+
+- Model completes "hard" tasks (DAG scheduler, event sourcing, markdown compiler) in 4-8 turns, not the expected 14-18
+- Registry workflow has an irreducible floor of ~8 turns (search + pull + write + run + report)
+- Registry only outperforms baseline when from-scratch build exceeds ~10 turns (25% of test cases)
+- Registry acts as a variance reducer (consistent 7-10 turns) not an accelerator
