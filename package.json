@@ -1,0 +1,43 @@
+{
+  "name": "agentoverflow",
+  "version": "0.1.0",
+  "description": "Do AI coding agents need a shared solution registry? A 3-agent experiment framework to find out.",
+  "type": "module",
+  "bin": {
+    "agentoverflow": "./cli.ts"
+  },
+  "scripts": {
+    "setup": "cd agentstack && npm install && npm run build && cd ../agentstack-dashboard && npm install",
+    "experiment": "npx tsx agentstack-dashboard/experiments/runner.ts",
+    "dashboard": "cd agentstack-dashboard && npm run dev"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "ai-agents",
+    "ai-benchmark",
+    "code-reuse",
+    "claude",
+    "llm",
+    "experiment",
+    "developer-tools",
+    "sqlite",
+    "cli",
+    "solutions-registry",
+    "agent-benchmark"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tahervali/agentoverflow"
+  },
+  "homepage": "https://github.com/tahervali/agentoverflow#readme",
+  "bugs": {
+    "url": "https://github.com/tahervali/agentoverflow/issues"
+  },
+  "author": "Taher Vali",
+  "license": "MIT",
+  "devDependencies": {
+    "tsx": "^4.19.3"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agentstack": {
+      "command": "node",
+      "args": ["./agentstack/dist/index.js"]
+    }
+  }
+}
